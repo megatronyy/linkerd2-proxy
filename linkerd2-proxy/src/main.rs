@@ -27,7 +27,10 @@ mod rt;
 const EX_USAGE: i32 = 64;
 
 fn main() {
+    // 取当前时间
     let start_time = StartTime::now();
+
+    // 日志配置
     let trace = match trace::Settings::from_env(start_time.into()).init() {
         Ok(t) => t,
         Err(e) => {
@@ -37,6 +40,7 @@ fn main() {
     };
 
     // Load configuration from the environment without binding ports.
+    // 当没有绑定端口时，从环境变量加载配置
     let config = match Config::try_from_env() {
         Ok(config) => config,
         Err(e) => {
